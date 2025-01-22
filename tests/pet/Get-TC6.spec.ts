@@ -15,14 +15,14 @@ test('TC6: Validar búsqueda de mascotas disponibles por estado', async ({ page 
         });
     });
 
-    // Realizamos la solicitud GET al endpoint (se interceptará y se devolverá el mock)
+    // solicitud GET al endpoint se interceptará y se devolverá el mock
     const response = await page.request.get('https://petstore.swagger.io/v2/pet/findByStatus?status=available');
     
-    // Validamos el estado de la respuesta
+    
     expect(response.status()).toBe(200);
     console.log(`Estado de la respuesta: ${response.status()}`); // Imprime el estado HTTP
 
-    // Obtenemos y validamos el cuerpo de la respuesta
+    
     interface Pet {
         id: number;
         name: string;
@@ -32,7 +32,7 @@ test('TC6: Validar búsqueda de mascotas disponibles por estado', async ({ page 
     const pets: Pet[] = await response.json();
     pets.forEach((pet: Pet) => expect(pet.status).toBe('available'));
 
-    // Imprimimos los datos de las primeras mascotas
+    
     console.log('Mascotas disponibles (parcial):');
     pets.slice(0, 2).forEach((pet: Pet) => {
         console.log(`- Mascota: ID=${pet.id}, Nombre=${pet.name}, Estado=${pet.status}`);

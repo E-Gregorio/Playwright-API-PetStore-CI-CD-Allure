@@ -11,7 +11,7 @@ test('TC5: Validar actualización de datos de mascota correctamente', async ({ r
   try {
     const response = await updatePet(request, updatedPet);
 
-    // Si la respuesta es exitosa (200), realizamos verificaciones
+    
     if (response.status() === 200) {
       const responseBody = await response.json();
       expect(responseBody.name).toBe(updatedPet.name);
@@ -27,6 +27,6 @@ test('TC5: Validar actualización de datos de mascota correctamente', async ({ r
     } else {
       console.error('Error en la actualización de la mascota:', error);
     }
-    throw error; // Lanza el error si algo falla
+    throw error; // Lanza 
   }
 });

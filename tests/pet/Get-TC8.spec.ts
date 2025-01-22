@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('TC8: Validar obtención de detalles de mascota por ID válido', async ({ request }) => {
-    // Adjuntar una nota descriptiva
+    
     await test.info().attach('Descripción del fallo - TC8', {
         body: `Durante la ejecución de la prueba TC8, se obtuvo un código de estado 404 en lugar de 200.
             La respuesta fue inesperada, ya que se esperaba un JSON válido con los detalles de la mascota.
@@ -16,7 +16,7 @@ test('TC8: Validar obtención de detalles de mascota por ID válido', async ({ r
 
     const response = await request.get('https://petstore.swagger.io/v2/pet/1');
 
-    // Validar la respuesta
+    // Validar  respuesta
     expect(response.status()).toBe(200);
     const petDetails = await response.json();
     expect(petDetails).toHaveProperty('id');

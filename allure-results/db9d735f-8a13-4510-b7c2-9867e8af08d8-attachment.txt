@@ -1,5 +1,0 @@
-Estado de la respuesta: 200
-Mascotas disponibles (parcial):
-- Mascota: ID=9223372036854772000, Nombre=fish, Estado=available
-- Mascota: ID=9223372036854772000, Nombre=fish, Estado=available
-TC6 completado: Validación exitosa de mascotas disponibles.

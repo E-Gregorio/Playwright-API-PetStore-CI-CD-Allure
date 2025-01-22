@@ -1,9 +1,0 @@
-Response Status: 200
-Response Body: {
-  id: 9223372036854755000,
-  petId: 0,
-  quantity: 1,
-  shipDate: '2025-01-22T21:43:53.072+0000',
-  status: 'placed',
-  complete: true
-}

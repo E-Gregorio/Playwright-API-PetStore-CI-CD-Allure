@@ -1,0 +1,5 @@
+Estado de la respuesta: 200
+Mascotas disponibles (parcial):
+- Mascota: ID=9223372036854775000, Nombre=doggie, Estado=available
+- Mascota: ID=9223372036854775000, Nombre=doggie, Estado=available
+TC6 completado: Validación exitosa de mascotas disponibles.
