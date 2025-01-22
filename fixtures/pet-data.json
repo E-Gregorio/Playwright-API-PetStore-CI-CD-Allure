@@ -1,0 +1,55 @@
+{
+  "newPet": {
+    "category": {
+      "id": 1,
+      "name": "dogs"
+    },
+    "name": "Bobby",
+    "photoUrls": ["string"],
+    "tags": [
+      {
+        "id": 0,
+        "name": "friendly"
+      }
+    ],
+    "status": "available"
+  },
+  "actPet": {
+    "category": {
+      "id": 1,
+      "name": "dogs"
+    },
+    "name": "Bobby",
+    "photoUrls": ["string"],
+    "tags": [
+      {
+        "id": 0,
+        "name": "friendly"
+      }
+    ],
+    "status": "available"
+  },
+  "updatePet": {
+    "id": 9223372036854761000,
+    "category": {
+      "id": 2,
+      "name": "cats"
+    },
+    "name": "Whiskers",
+    "photoUrls": ["updated-url"],
+    "tags": [
+      {
+        "id": 1,
+        "name": "cute"
+      }
+    ],
+    "status": "sold"
+  },
+  "testIds": {
+    "validId": "123",
+    "invalidId": "999999"
+  },
+  "queryParams": {
+    "status": "available"
+  }
+}

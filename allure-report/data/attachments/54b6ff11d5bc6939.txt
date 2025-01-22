@@ -1,0 +1,18 @@
+Cuerpo de la respuesta: {
+  "id": 9223372036854776000,
+  "category": {
+    "id": 1,
+    "name": "dogs"
+  },
+  "name": "Bobby",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "friendly"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,6 @@
+Estado de la respuesta: 404
+Respuesta JSON: {
+  "code": 1,
+  "type": "error",
+  "message": "Pet not found"
+}
