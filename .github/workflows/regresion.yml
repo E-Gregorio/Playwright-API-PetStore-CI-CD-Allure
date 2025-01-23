@@ -32,3 +32,10 @@ jobs:
         name: allure-report
         path: allure-report/
         retention-days: 30
+    - name: Publish Allure Report
+      if: always()
+      uses: m-masnou/allure-report-action@v1
+      with:
+        allure-dir: allure-results
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
