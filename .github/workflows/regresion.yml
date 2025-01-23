@@ -1,33 +1,94 @@
-name: Playwright Tests
+name: 🧪 Regression Pipeline for Petstore API
+run-name: ${{ github.actor }} triggered Regression Pipeline on ${{ github.ref_name }}
+
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      system:
+        description: Select the OS
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - ubuntu-latest
+          - ubuntu-22.04
+          - macos-latest
+          - windows-latest
+      environment:
+        description: Select the Test Environment
+        required: true
+        default: 'QA'
+        type: choice
+        options:
+          - DEV
+          - SANDBOX
+          - QA
+          - STAGING
+          - UAT
+          - PROD
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  RegressionTest:
+    runs-on: ${{ github.event.inputs.system }}
+    environment:
+      name: ${{ github.event.inputs.environment }}
+    env:
+      TEST_ENV: ${{ github.event.inputs.environment }}
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - name: 📘 Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: 💽 Install Node.js v20
+      uses: actions/setup-node@v4
       with:
-        node-version: 18
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - name: Generate Allure Report
-      if: always()
+        node-version: 20
+
+    - name: 🍙 Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: 🧬 Install Dependencies
+      run: bun install
+
+    - name: 🔎 Run TypeScript Checks
+      run: bun run check:ts
+
+    - name: 🧪 Run Regression Tests
       run: |
-        npm install -g allure-commandline
-        allure generate allure-results -o allure-report --clean
-    - name: Upload Allure Report
-      if: always()
-      uses: actions/upload-artifact@v3
+        bun run ci:regression
+
+    - name: 📡 Upload Test Artifacts (if failures)
+      if: failure()
+      uses: actions/upload-artifact@v4
       with:
-        name: allure-report
-        path: allure-report/
-        retention-days: 30
+        name: regression-test-artifacts
+        path: test-results
+        retention-days: 15
+
+    - name: 📊 Checkout Allure Report History
+      uses: actions/checkout@v4
+      if: always()
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: 📊 Generate Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        gh_pages: gh-pages
+        allure_results: reports/allure-results
+        allure_report: allure-report
+        allure_history: allure-history
+        keep_reports: 10
+
+    - name: 🚀 Deploy Allure Report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-history
+        keep_files: true
